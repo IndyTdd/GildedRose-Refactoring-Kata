@@ -73,25 +73,36 @@ namespace GildedRoseKata
                         break;
                     default:
                     {
-                        if (item.Quality > 0)
-                        {
-                            item.Quality -= 1;
-                        }
-
-                        item.SellIn -= 1;
-
-                        if (item.SellIn < 0)
-                        {
-                            if (item.Quality > 0)
-                            {
-                                item.Quality -= 1;
-                            }
-                        }
-
+                        new GenericItemUpdater().Update(item);
                         break;
                     }
                 }
             }
         }
+    }
+
+    internal class ItemUpdater
+    {
+        public virtual void Update(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                item.Quality -= 1;
+            }
+
+            item.SellIn -= 1;
+
+            if (item.SellIn < 0)
+            {
+                if (item.Quality > 0)
+                {
+                    item.Quality -= 1;
+                }
+            }
+        }
+    }
+
+    internal class GenericItemUpdater : ItemUpdater
+    {
     }
 }
