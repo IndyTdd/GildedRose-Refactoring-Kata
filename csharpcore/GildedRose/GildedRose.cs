@@ -18,59 +18,19 @@ namespace GildedRoseKata
                 {
                     case "Aged Brie":
                     {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality += 1;
-                        }
-                    
-                        item.SellIn -= 1;
-
-                        if (item.SellIn < 0)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality += 1;
-                            }
-                        }
-
+                        new AgedBrieItemUpdater().Update(item);
                         break;
                     }
                     case "Backstage passes to a TAFKAL80ETC concert":
                     {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality += 1;
-
-                            
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    item.Quality += 1;
-                                }
-                            }
-                            
-                        }
-                        
-                        item.SellIn -= 1;
-
-                        if (item.SellIn < 0)
-                        {
-                            item.Quality -= item.Quality;
-                        }
-
+                        new BackstagePassesItemUpdater().Update(item);
                         break;
                     }
                     case "Sulfuras, Hand of Ragnaros":
+                    {
+                        new SulfurasItemUpdater().Update(item);
                         break;
+                    }
                     default:
                     {
                         new GenericItemUpdater().Update(item);
@@ -102,7 +62,71 @@ namespace GildedRoseKata
         }
     }
 
+    class AgedBrieItemUpdater : ItemUpdater
+    {
+        public override void Update(Item item)
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality += 1;
+            }
+                    
+            item.SellIn -= 1;
+
+            if (item.SellIn < 0)
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality += 1;
+                }
+            }
+        }
+    }
+
+    class BackstagePassesItemUpdater : ItemUpdater
+    {
+        public override void Update(Item item)
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality += 1;
+
+                            
+                if (item.SellIn < 11)
+                {
+                    if (item.Quality < 50)
+                    {
+                        item.Quality += 1;
+                    }
+                }
+
+                if (item.SellIn < 6)
+                {
+                    if (item.Quality < 50)
+                    {
+                        item.Quality += 1;
+                    }
+                }
+                            
+            }
+                        
+            item.SellIn -= 1;
+
+            if (item.SellIn < 0)
+            {
+                item.Quality -= item.Quality;
+            }
+        }
+    }
+
     internal class GenericItemUpdater : ItemUpdater
     {
     }
+    
+    internal class SulfurasItemUpdater : ItemUpdater
+    {
+        public override void Update(Item item)
+        { }
+    }
 }
+
