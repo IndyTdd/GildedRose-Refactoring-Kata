@@ -18,15 +18,14 @@ namespace GildedRoseKata
 
         private static ItemUpdater GetItemUpdater(string name)
         {
-            if (name == ItemNames.AgedBrie)
-                return new AgedBrieItemUpdater();
-            if (name == ItemNames.BackstagePasses)
-                return new BackstagePassesItemUpdater();
-            if (name == ItemNames.Sulfuras)
-                return new SulfurasItemUpdater();
-            if (name == ItemNames.Conjured)
-                return new ConjuredItemUpdater();
-            return new GenericItemUpdater();
+            return name switch
+            {
+                ItemNames.AgedBrie => new AgedBrieItemUpdater(),
+                ItemNames.BackstagePasses => new BackstagePassesItemUpdater(),
+                ItemNames.Sulfuras => new SulfurasItemUpdater(),
+                ItemNames.Conjured => new ConjuredItemUpdater(),
+                _ => new GenericItemUpdater()
+            };
         }
     }
 }
