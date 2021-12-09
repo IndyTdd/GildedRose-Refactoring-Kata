@@ -16,7 +16,7 @@ namespace GildedRoseTests
             _conjured = new Item {Name = "Conjured", Quality = 10, SellIn = 10};
             _generic = new Item {Name = "Generic", Quality = 10, SellIn = 10};
             
-            _items = new List<Item>()
+            _items = new List<Item>
             {
                 _conjured,
                 _generic,
